@@ -4,7 +4,7 @@ class Rice extends HTMLElement {
   }
   connectedCallback() {
     this.innerHTML = `
-      <button class="insertedRecipe">
+      <button class="insertedRecipe showRice">
         <h3>Rice</h3>
       </button>
 

@@ -56,14 +56,14 @@ $(function() {
     $('.insertedHowto').hide();
 
     $('#foldOutFoldIn')[0].value = 'unfold';
-    $('#foldOutFoldIn')[0].textContent = 'Fold index ud';
+    $('#foldOutFoldIn')[0].textContent = 'Unfold index';
   }
 
 
   function showIndex() {
     $('.opskrifter').show();
     $('#foldOutFoldIn')[0].value = 'unfoldAll';
-    $('#foldOutFoldIn')[0].textContent = 'Fold alt ud (for at kunne s\u00f8ge)';
+    $('#foldOutFoldIn')[0].textContent = 'Unfold everything (for searching)';
   }
 
 
@@ -73,11 +73,17 @@ $(function() {
     $('.howto').show();
 
     $('#foldOutFoldIn')[0].value = 'fold';
-    $('#foldOutFoldIn')[0].textContent = 'Fold alt ind';
+    $('#foldOutFoldIn')[0].textContent = 'Fold everything';
   }
 
   // Fold everything
   $('.slut').on('click', function() {
+    if ( $('.slut')[0].value == 'sideDishShown') {
+      $('.kategori').not('animated').toggle();
+      $('.recipe').not('animated').toggle();
+      $('.rice').not('animated').toggle();
+      $('.slut')[0].value = 'noSideDish';
+    }
     $('input').prop("checked", false);
     hide();
   });
@@ -90,14 +96,51 @@ $(function() {
 
   $('.opskrifter').on('click', '.recipe', function(event) {
     event.preventDefault();
+    $('.ingredienser').hide(500);
+    $('.howto').hide(500);
     $(this).next('.ingredienser').not('animated').slideToggle();
     $(this).next('.ingredienser').next('.howto').not('animated').slideToggle();
   });
 
-  // Repeted recipes are only unfolded when clicked explicitly
-  $('.insertedRecipe').on('click', function(event) {
-    event.preventDefault();
-    $(this).next('.insertedIngredienser').not('animated').slideToggle();
-    $(this).next('.insertedIngredienser').next('.insertedHowto').not('animated').slideToggle();
-  });
+  let sideDishes = {showPasta: '.pasta',
+                    showRice: '.rice',
+                    showBakedPotatoes: '.bakedPotatoes',
+                    showGreenSalad: '.greenSalad',
+                    showCarrotSalad: '.carrotSalad',
+                    showButterCabbage: '.butterCabbage',
+                    showMashedPotatoes: '.mashedPotatoes',
+                    showRootVegs: '.rootVegs',
+                    showHasselbachs: '.hasselbachs',
+                    showBakedSesamePotatoes: '.bakedSesamePotatoes',
+                    showTrimitri: '.trimitri',
+                    showChappaties: '.chappaties',
+                    showTortilla: '.tortilla',
+                    showHomemadePasta: '.homemadePasta',
+                    showPita: '.pita',
+                    showSageRolls: '.sageRolls'};
+  // TODO: Baharat as inserted recipe
+
+  for (let sDish in sideDishes) {
+    $('.' + sDish).on('click', function(event) {
+      $('.kategori').not('animated').slideToggle();
+      $('.recipe').not('animated').slideToggle();
+      $(sideDishes[sDish]).not('animated').slideToggle();
+      if ($('.slut')[0].value != 'sideDishShown') {
+        $('.slut')[0].value = 'sideDishShown';
+      } else {
+        $('.slut')[0].value = 'noSideDish';
+      }
+    });
+  };
+
+  // $('.showRice').on('click', function(event) {
+  //   $('.kategori').not('animated').slideToggle();
+  //   $('.recipe').not('animated').slideToggle();
+  //   $('.rice').not('animated').slideToggle();
+  //   if ($('.slut')[0].value != 'sideDishShown') {
+  //     $('.slut')[0].value = 'sideDishShown';
+  //   } else {
+  //     $('.slut')[0].value = 'noSideDish';
+  //   }
+  // });
 })

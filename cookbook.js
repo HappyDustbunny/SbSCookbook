@@ -17,10 +17,10 @@ $(function() {
     if ($(this)[0].value == 'unfold') {
       showIndex();
     } else if ($(this)[0].value == 'unfoldAll') {
-      show();
+      showAll();
     }
     else {
-      hide();
+      hideAll();
     }
 
   });
@@ -48,7 +48,7 @@ $(function() {
   });
 
 
-  function hide() {
+  function hideAll() {
     $('.opskrifter').hide();
     $('.ingredienser').hide();
     $('.howto').hide();
@@ -67,7 +67,7 @@ $(function() {
   }
 
 
-  function show() {
+  function showAll() {
     $('.opskrifter').show();
     $('.ingredienser').show();
     $('.howto').show();

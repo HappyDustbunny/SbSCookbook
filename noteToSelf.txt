@@ -1,0 +1,2 @@
+To make a custom html-tag with parsing of text in the custom tag, use self.innerText
+

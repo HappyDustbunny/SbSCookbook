@@ -85,7 +85,7 @@ $(function() {
       $('.slut')[0].value = 'noSideDish';
     }
     $('input').prop("checked", false);
-    hide();
+    hideAll();
   });
 
 
@@ -102,24 +102,27 @@ $(function() {
     $(this).next('.ingredienser').next('.howto').not('animated').slideToggle();
   });
 
-  let sideDishes = {showPasta: '.pasta',
-                    showRice: '.rice',
+  let sideDishes = {
                     showBakedPotatoes: '.bakedPotatoes',
-                    showGreenSalad: '.greenSalad',
-                    showCarrotSalad: '.carrotSalad',
-                    showButterCabbage: '.butterCabbage',
-                    showMashedPotatoes: '.mashedPotatoes',
-                    showRootVegs: '.rootVegs',
-                    showHasselbachs: '.hasselbachs',
                     showBakedSesamePotatoes: '.bakedSesamePotatoes',
-                    showTrimitri: '.trimitri',
+                    showButterCabbage: '.butterCabbage',
+                    showCarrotSalad: '.carrotSalad',
                     showChappaties: '.chappaties',
-                    showTortilla: '.tortilla',
+                    showGreenSalad: '.greenSalad',
+                    showHasselbachs: '.hasselbachs',
                     showHomemadePasta: '.homemadePasta',
+                    showMashedPotatoes: '.mashedPotatoes',
+                    showPasta: '.pasta',
                     showPita: '.pita',
-                    showSageRolls: '.sageRolls'};
+                    showRice: '.rice',
+                    showRootVegs: '.rootVegs',
+                    showSageRolls: '.sageRolls',
+                    showTrimitri: '.trimitri',
+                    showTortilla: '.tortilla'
+                  };
   // TODO: Baharat as inserted recipe
 
+// Sets an eventlistener for each sidedish when this javascript file runs at start
   for (let sDish in sideDishes) {
     $('.' + sDish).on('click', function(event) {
       $('.kategori').not('animated').slideToggle();

@@ -49,11 +49,11 @@ $(function() {
 
 
   function hideAll() {
-    $('.opskrifter').hide();
-    $('.ingredienser').hide();
-    $('.howto').hide();
-    $('.insertedIngredienser').hide();
-    $('.insertedHowto').hide();
+    $('.opskrifter').hide(500);
+    $('.ingredienser').hide(500);
+    $('.howto').hide(500);
+    $('.insertedIngredienser').hide(500);
+    $('.insertedHowto').hide(500);
 
     $('#foldOutFoldIn')[0].value = 'unfold';
     $('#foldOutFoldIn')[0].textContent = 'Unfold index';
@@ -79,27 +79,31 @@ $(function() {
   // Fold everything
   $('.slut').on('click', function() {
     if ( $('.slut')[0].value == 'sideDishShown') {
-      $('.kategori').not('animated').toggle();
-      $('.recipe').not('animated').toggle();
-      $('.rice').not('animated').toggle();
+      $('.kategori').not('animated').slideToggle();
+      $('.recipe').not('animated').slideToggle();
+      $('.rice').not('animated').slideToggle();
       $('.slut')[0].value = 'noSideDish';
     }
     $('input').prop("checked", false);
     hideAll();
   });
 
-
+// TODO: Kategori'es disapear if pressed during an insertedRecipe showing
   $('.oversigt').on('click', '.kategori', function(event) {
-    event.preventDefault();
-    $(this).next('.opskrifter').not('animated').slideToggle();
+    if ( $('.slut')[0].value != 'sideDishShown') {
+      event.preventDefault();
+      $(this).next('.opskrifter').not('animated').slideToggle();
+    }
   });
 
   $('.opskrifter').on('click', '.recipe', function(event) {
-    event.preventDefault();
-    $('.ingredienser').hide(500);
-    $('.howto').hide(500);
-    $(this).next('.ingredienser').not('animated').slideToggle();
-    $(this).next('.ingredienser').next('.howto').not('animated').slideToggle();
+    if ( $('.slut')[0].value != 'sideDishShown') {
+      event.preventDefault();
+      $('.ingredienser').hide(500);
+      $('.howto').hide(500);
+      $(this).next('.ingredienser').not('animated').show();
+      $(this).next('.ingredienser').next('.howto').not('animated').show();
+    }
   });
 
   let sideDishes = {

@@ -47,7 +47,7 @@ $(function() {
     }
   });
 
-  $('.slut')[0].value = 'noSideDish';
+  $('.slut')[0].value = 'noSideDish'; // Initialise variable used for tracking if sidedishes are open
 
   function hideAll() {
     $('.opskrifter').hide(500);
@@ -79,11 +79,11 @@ $(function() {
 
   // Fold everything
   $('.slut').on('click', function() {
-    if ( $('.slut')[0].value != 'noSideDish') {
+    if ( $('.slut')[0].value != 'noSideDish') { // If a sidedish is open it needs to be closed before toggling everything shut
       $('.kategori').not('animated').slideToggle();
       $('.recipe').not('animated').slideToggle();
-      $($('.slut')[0].value).not('animated').slideToggle(); // TODO Expand functionality to all insertedRecipes
-      // $('.rice').not('animated').slideToggle(); // TODO Expand functionality to all insertedRecipes
+      let sideDishClass = $('.slut')[0].value; // The current sidedish is stored in $('.slut')[0].value
+      $(sideDishClass).not('animated').slideToggle(); // Toggles open sidedishes.
       $('.slut')[0].value = 'noSideDish';
     }
     $('input').prop("checked", false);
@@ -107,6 +107,7 @@ $(function() {
     }
   });
 
+  // Sidedishes are shown by toggling classes. This means that the Kategori classes involved needs the same class as the sidedishes in the Kategori
   let sideDishes = {
                     showBakedPotatoes: '.bakedPotatoes',
                     showBakedSesamePotatoes: '.bakedSesamePotatoes',
@@ -135,7 +136,6 @@ $(function() {
       $(sideDishes[sDish]).not('animated').slideToggle();
       if ($('.slut')[0].value == 'noSideDish') {
         $('.slut')[0].value = sideDishes[sDish];
-        // $('.slut')[0].value = 'sideDishShown';
       } else {
         $('.slut')[0].value = 'noSideDish';
       }

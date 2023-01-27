@@ -47,6 +47,7 @@ $(function() {
     }
   });
 
+  $('.slut')[0].value = 'noSideDish';
 
   function hideAll() {
     $('.opskrifter').hide(500);
@@ -78,26 +79,26 @@ $(function() {
 
   // Fold everything
   $('.slut').on('click', function() {
-    if ( $('.slut')[0].value == 'sideDishShown') {
+    if ( $('.slut')[0].value != 'noSideDish') {
       $('.kategori').not('animated').slideToggle();
       $('.recipe').not('animated').slideToggle();
-      $('.rice').not('animated').slideToggle();
+      $($('.slut')[0].value).not('animated').slideToggle(); // TODO Expand functionality to all insertedRecipes
+      // $('.rice').not('animated').slideToggle(); // TODO Expand functionality to all insertedRecipes
       $('.slut')[0].value = 'noSideDish';
     }
     $('input').prop("checked", false);
     hideAll();
   });
 
-// TODO: Kategori'es disapear if pressed during an insertedRecipe showing
   $('.oversigt').on('click', '.kategori', function(event) {
-    if ( $('.slut')[0].value != 'sideDishShown') {
+    if ( $('.slut')[0].value == 'noSideDish') {
       event.preventDefault();
       $(this).next('.opskrifter').not('animated').slideToggle();
     }
   });
 
   $('.opskrifter').on('click', '.recipe', function(event) {
-    if ( $('.slut')[0].value != 'sideDishShown') {
+    if ( $('.slut')[0].value == 'noSideDish') {
       event.preventDefault();
       $('.ingredienser').hide(500);
       $('.howto').hide(500);
@@ -132,22 +133,13 @@ $(function() {
       $('.kategori').not('animated').slideToggle();
       $('.recipe').not('animated').slideToggle();
       $(sideDishes[sDish]).not('animated').slideToggle();
-      if ($('.slut')[0].value != 'sideDishShown') {
-        $('.slut')[0].value = 'sideDishShown';
+      if ($('.slut')[0].value == 'noSideDish') {
+        $('.slut')[0].value = sideDishes[sDish];
+        // $('.slut')[0].value = 'sideDishShown';
       } else {
         $('.slut')[0].value = 'noSideDish';
       }
     });
   };
 
-  // $('.showRice').on('click', function(event) {
-  //   $('.kategori').not('animated').slideToggle();
-  //   $('.recipe').not('animated').slideToggle();
-  //   $('.rice').not('animated').slideToggle();
-  //   if ($('.slut')[0].value != 'sideDishShown') {
-  //     $('.slut')[0].value = 'sideDishShown';
-  //   } else {
-  //     $('.slut')[0].value = 'noSideDish';
-  //   }
-  // });
 })

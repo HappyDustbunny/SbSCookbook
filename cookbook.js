@@ -131,13 +131,19 @@ $(function() {
 // Sets an eventlistener for each sidedish when this javascript file runs at start
   for (let sDish in sideDishes) {
     $('.' + sDish).on('click', function(event) {
-      $('.kategori').not('animated').slideToggle();
-      $('.recipe').not('animated').slideToggle();
-      $(sideDishes[sDish]).not('animated').slideToggle();
-      if ($('.slut')[0].value == 'noSideDish') {
-        $('.slut')[0].value = sideDishes[sDish];
+      if ($('.slut')[0].value == sideDishes[sDish] || $('.slut')[0].value == 'noSideDish') {
+        $('.kategori').not('animated').slideToggle();
+        $('.recipe').not('animated').slideToggle();
+        $(sideDishes[sDish]).not('animated').slideToggle();
+        if ($('.slut')[0].value == 'noSideDish') {
+          $('.slut')[0].value = sideDishes[sDish];
+          $(this).css({'border-style': 'inset', 'background-color': 'rgb(179, 244, 255)'});
+        } else {
+          $('.slut')[0].value = 'noSideDish';
+          $(this).css({'border-style': 'outset', 'background-color': 'rgb(205, 248, 255)'});
+        }
       } else {
-        $('.slut')[0].value = 'noSideDish';
+        alert('Please close sidedish before proceeding');
       }
     });
   };

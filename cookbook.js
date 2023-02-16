@@ -1,16 +1,18 @@
 $(function() {
-  $('.opskrifter').hide();
-  $('.ingredienser').hide();
-  $('.howto').hide();
-  // Repeted recipes are treated differently: they do not unfold until explicitly clicked
-  $('.insertedIngredienser').hide();
-  $('.insertedHowto').hide();
-  // The a link is shown and the about button is hidden if no javascript is present
-  $('#fallBackLink').hide();
-  $('#about').show();
-  $('#about').on('click', function() {
-    window.location = 'aboutTrinForTrin.html'
-  });
+  if (!window.location.hash) {
+    $('.opskrifter').hide();
+    $('.ingredienser').hide();
+    $('.howto').hide();
+    // Repeted recipes are treated differently: they do not unfold until explicitly clicked
+    $('.insertedIngredienser').hide();
+    $('.insertedHowto').hide();
+    // The a link is shown and the about button is hidden if no javascript is present
+    $('#fallBackLink').hide();
+    $('#about').show();
+    $('#about').on('click', function() {
+      window.location = 'aboutTrinForTrin.html'
+    });
+  }
 
 
   $('#foldOutFoldIn').on('click', function() {
@@ -88,6 +90,7 @@ $(function() {
     }
     $('input').prop("checked", false);
     hideAll();
+    window.location.hash = '';
   });
 
   $('.oversigt').on('click', '.kategori', function(event) {
@@ -100,11 +103,17 @@ $(function() {
   $('.opskrifter').on('click', '.recipe', function(event) {
     if ( $('.slut')[0].value == 'noSideDish') {
       event.preventDefault();
-      $('.ingredienser').hide(500);
+      $('.ingredienser').hide(500); // Hide open recipes if any is open
       $('.howto').hide(500);
-      $(this).next('.ingredienser').not('animated').show();
+      $(this).next('.ingredienser').not('animated').show();  // Open current recipe
       $(this).next('.ingredienser').next('.howto').not('animated').show();
     }
+  });
+
+  $('.share').on('click', function(event) {
+    let subject = 'Link to recipe';
+    let body = 'Try this recipe: ' + window.location.href + $(this).parent().prev()[0].id;
+    document.location = 'mailto:' + '?subject=' + subject + '&body=' + body;
   });
 
   // Sidedishes are shown by toggling classes. This means that the Kategori classes involved needs the same class as the sidedishes in the Kategori

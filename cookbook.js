@@ -115,7 +115,7 @@ $(function() {
 
   $('.share').on('click', function(event) {
     let subject = 'Link to recipe';
-    let body = 'Try this recipe: ' + window.location.href + $(this).parent().parent().prev()[0].id;
+    let body = 'Try this recipe: ' + window.location.href + '#' + $(this).parent().parent().prev()[0].id;
     document.location = 'mailto:' + '?subject=' + subject + '&body=' + body;
   });
 
@@ -123,7 +123,7 @@ $(function() {
     if ( $('.slut')[0].value == 'noSideDish') {
       let sideDishURL = window.location.href + '#' + $(this)[0].innerText;
       let element = $(this).parent();
-      $('<iframe>', { src: sideDishURL, width: '100%', height: "500px" }).appendTo(element);
+      $('<iframe>', { src: sideDishURL, scrolling: 'no', width: '100%', height: "1200px" }).appendTo(element);
       // $(this).append('<iframe src=sideDishURL width="100%" height="500px"></iframe>');
       $('.slut')[0].value = 'sideDish';
     } else {

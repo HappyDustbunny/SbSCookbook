@@ -85,15 +85,16 @@ $(function() {
   // Fold everything
   $('.slut').on('click', function() {
     if ( $('.slut')[0].value != 'noSideDish') { // If a sidedish is open it needs to be closed before toggling everything shut
-      $('.kategori').not('animated').slideToggle();
-      $('.recipe').not('animated').slideToggle();
-      let sideDishClass = $('.slut')[0].value; // The current sidedish is stored in $('.slut')[0].value
-      $(sideDishClass).not('animated').slideToggle(); // Toggles open sidedishes.
+      // $('.kategori').not('animated').slideToggle();
+      // $('.recipe').not('animated').slideToggle();
+      // let sideDishClass = $('.slut')[0].value; // The current sidedish is stored in $('.slut')[0].value
+      // $(sideDishClass).not('animated').slideToggle(); // Toggles open sidedishes.
+      $('#sideDish').remove();
       $('.slut')[0].value = 'noSideDish';
     }
     $('input').prop("checked", false);
     hideAll();
-    window.location.hash = '';
+    window.location.hash = '';  //Used for linking to reciepes
   });
 
   $('.oversigt').on('click', '.kategori', function(event) {
@@ -119,60 +120,45 @@ $(function() {
     document.location = 'mailto:' + '?subject=' + subject + '&body=' + body;
   });
 
-// Iframeløsning:
-  // $('.insertedRecipe').on('click', function(event) {
-  //   if ( $('.slut')[0].value == 'noSideDish') {
-  //     let sideDishURL = window.location.href + '#' + $(this)[0].innerText;
-  //     let element = $(this).parent();
-  //     $('<iframe>', { src: sideDishURL, scrolling: 'no', width: '100%', height: "1200px" }).appendTo(element);
-  //     // $(this).append('<iframe src=sideDishURL width="100%" height="500px"></iframe>');
-  //     $('.slut')[0].value = 'sideDish';
-  //   } else {
-  //     $('iframe').remove();
-  //     $('.slut')[0].value = 'noSideDish';
-  //   }
-  // });
+    let sideDishes = {
+                      showBakedPotatoes: '#bakedPotatoes',
+                      showBakedSesamePotatoes: '#bakedSesamePotatoes',
+                      showButterCabbage: '#butterCabbage',
+                      showCarrotSalad: '#carrotSalad',
+                      showChappaties: '#chappaties',
+                      showGreenSalad: '#greenSalad',
+                      showHasselbachs: '#hasselbachs',
+                      showHomemadePasta: '#homemadePasta',
+                      showMashedPotatoes: '#mashedPotatoes',
+                      showPasta: '#pasta',
+                      showPita: '#pita',
+                      showRice: '#rice',
+                      showRootVegs: '#rootVegs',
+                      showSageRolls: '#sageRolls',
+                      showTrimitri: '#trimitri',
+                      showTortilla: '#tortilla'
+                    };
 
-  // Sidedishes are shown by toggling classes. This means that the Kategori classes involved needs the same class as the sidedishes in the Kategori
-  let sideDishes = {
-                    showBakedPotatoes: '.bakedPotatoes',
-                    showBakedSesamePotatoes: '.bakedSesamePotatoes',
-                    showButterCabbage: '.butterCabbage',
-                    showCarrotSalad: '.carrotSalad',
-                    showChappaties: '.chappaties',
-                    showGreenSalad: '.greenSalad',
-                    showHasselbachs: '.hasselbachs',
-                    showHomemadePasta: '.homemadePasta',
-                    showMashedPotatoes: '.mashedPotatoes',
-                    showPasta: '.pasta',
-                    showPita: '.pita',
-                    showRice: '.rice',
-                    showRootVegs: '.rootVegs',
-                    showSageRolls: '.sageRolls',
-                    showTrimitri: '.trimitri',
-                    showTortilla: '.tortilla'
-                  };
-  // TODO: Baharat as inserted recipe
-
-// Sets an eventlistener for each sidedish when this javascript file runs at start
   for (let sDish in sideDishes) {
     $('.' + sDish).on('click', function(event) {
-      if ($('.slut')[0].value == sideDishes[sDish] || $('.slut')[0].value == 'noSideDish') {
-        // event.preventDefault();
-        $('.kategori').not('animated').slideToggle();
-        $('.recipe').not('animated').slideToggle();
-        $(sideDishes[sDish]).not('animated').slideToggle();
-        if ($('.slut')[0].value == 'noSideDish') {
-          $('.slut')[0].value = sideDishes[sDish];
-          $(this).css({'border-style': 'inset', 'background-color': 'rgb(179, 244, 255)'});
-        } else {
-          $('.slut')[0].value = 'noSideDish';
-          $(this).css({'border-style': 'outset', 'background-color': 'rgb(205, 248, 255)'});
-        }
+      if ( $('.slut')[0].value == 'noSideDish') {
+        let insertedRecipeHTML = $(sideDishes[sDish]).html().replace(/style="display: none;"/g, '');
+        insertedRecipeHTML = insertedRecipeHTML.replace('<button class="slut">(End)</button>', '');
+        insertedRecipeHTML = '<div id="sideDish">' + insertedRecipeHTML + '</div>';
+        $(this).after(insertedRecipeHTML);
+        $(this).css({'border-style': 'inset'});
+        $('.slut')[0].value = 'sideDish';
       } else {
-        alert('Please close sidedish before proceeding');
+        $('#sideDish').remove();
+        $(this).css({'border-style': 'outset'});
+        $('.slut')[0].value = 'noSideDish';
       }
     });
   };
+
+  // TODO: Fix inset/outset if a side dish is opened while another side dish is showing
+  // By adding class to the button opening a recipe?
+
+  // TODO: Baharat as inserted recipe?
 
 });

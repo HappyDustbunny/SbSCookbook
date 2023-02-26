@@ -28,8 +28,6 @@ $(function() {
 
   });
 
-// TODO: Avoid folding opskrifter and kategori above inserted recipe?
-
   let direction = 1;
   let originalFontSize = parseInt($('body').css("font-size"));
   let fontSize = originalFontSize;
@@ -85,10 +83,6 @@ $(function() {
   // Fold everything
   $('.slut').on('click', function() {
     if ( $('.slut')[0].value != 'noSideDish') { // If a sidedish is open it needs to be closed before toggling everything shut
-      // $('.kategori').not('animated').slideToggle();
-      // $('.recipe').not('animated').slideToggle();
-      // let sideDishClass = $('.slut')[0].value; // The current sidedish is stored in $('.slut')[0].value
-      // $(sideDishClass).not('animated').slideToggle(); // Toggles open sidedishes.
       $('#sideDish').remove();
       $('.slut')[0].value = 'noSideDish';
     }
@@ -141,23 +135,20 @@ $(function() {
 
   for (let sDish in sideDishes) {
     $('.' + sDish).on('click', function(event) {
-      if ( $('.slut')[0].value == 'noSideDish') {
+      $('#sideDish').remove();
+      $('.insertedRecipe').css({'border-style': 'outset'});
+      if ( $('.slut')[0].value == 'noSideDish' || !$(this).attr('class').includes($('.slut')[0].value)) {
         let insertedRecipeHTML = $(sideDishes[sDish]).html().replace(/style="display: none;"/g, '');
         insertedRecipeHTML = insertedRecipeHTML.replace('<button class="slut">(End)</button>', '');
         insertedRecipeHTML = '<div id="sideDish">' + insertedRecipeHTML + '</div>';
         $(this).after(insertedRecipeHTML);
         $(this).css({'border-style': 'inset'});
-        $('.slut')[0].value = 'sideDish';
+        $('.slut')[0].value = sDish;
       } else {
-        $('#sideDish').remove();
-        $(this).css({'border-style': 'outset'});
         $('.slut')[0].value = 'noSideDish';
       }
     });
   };
-
-  // TODO: Fix inset/outset if a side dish is opened while another side dish is showing
-  // By adding class to the button opening a recipe?
 
   // TODO: Baharat as inserted recipe?
 

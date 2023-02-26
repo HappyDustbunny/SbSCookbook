@@ -92,20 +92,22 @@ $(function() {
   });
 
   $('.oversigt').on('click', '.kategori', function(event) {
-    if ( $('.slut')[0].value == 'noSideDish') {
-      event.preventDefault();
-      $(this).next('.opskrifter').not('animated').slideToggle();
-    }
+    event.preventDefault();
+    $(this).next('.opskrifter').not('animated').slideToggle();
+    // if ( $('.slut')[0].value == 'noSideDish') {
+    // }
   });
 
   $('.opskrifter').on('click', '.recipe', function(event) {
-    if ( $('.slut')[0].value == 'noSideDish') {
-      event.preventDefault();
-      $('.ingredienser').hide(500); // Hide open recipes if any is open
-      $('.howto').hide(500);
-      $(this).next('.ingredienser').not('animated').show();  // Open current recipe
-      $(this).next('.ingredienser').next('.howto').not('animated').show();
-    }
+    event.preventDefault();
+    $('#sideDish').remove(); // Close open side dishes
+    $('.insertedRecipe').css({'border-style': 'outset'}); // Fix side dish buttons
+    $('.ingredienser').hide(500); // Hide open recipes if any is open
+    $('.howto').hide(500);
+    $(this).next('.ingredienser').not('animated').show();  // Open current recipe
+    $(this).next('.ingredienser').next('.howto').not('animated').show();
+    // if ( $('.slut')[0].value == 'noSideDish') {
+    // }
   });
 
   $('.share').on('click', function(event) {
@@ -133,7 +135,7 @@ $(function() {
                       showTortilla: '#tortilla'
                     };
 
-  for (let sDish in sideDishes) {
+  for (let sDish in sideDishes) {  // Puts eventlisteners on all side dish buttons
     $('.' + sDish).on('click', function(event) {
       $('#sideDish').remove();
       $('.insertedRecipe').css({'border-style': 'outset'});
@@ -141,9 +143,11 @@ $(function() {
         let insertedRecipeHTML = $(sideDishes[sDish]).html().replace(/style="display: none;"/g, '');
         insertedRecipeHTML = insertedRecipeHTML.replace('<button class="slut">(End)</button>', '');
         insertedRecipeHTML = '<div id="sideDish">' + insertedRecipeHTML + '</div>';
-        $(this).after(insertedRecipeHTML);
         $(this).css({'border-style': 'inset'});
+        $(this).after(insertedRecipeHTML);
         $('.slut')[0].value = sDish;
+        $('#sideDish').hide();
+        $('#sideDish').slideDown();
       } else {
         $('.slut')[0].value = 'noSideDish';
       }

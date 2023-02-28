@@ -1,5 +1,5 @@
 
-let VERSION = 1.002; // Change version number to facilitate updates
+let VERSION = 1.003; // Change version number to facilitate updates
 let SBSC_CACHE = 'SBSC-cache';
 let CACHED_URLS = [ // Copy project path from EVERY entry to avoid mistakes
   'favicons/favicon-192.png', // Check that ALL files have an extension

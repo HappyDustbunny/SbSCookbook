@@ -59,11 +59,6 @@ for being able to check the box -->
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write("<script src='jquery-3.5.1.min.js'><\/script>")</script> -->
     <script src="cookbook.js" type='text/javascript' defer></script>
-    <!-- Recipes used multiple times gets their own tag: -->
-  <script src='components/rice.js' type='text/javascript' defer></script>
-  <script src='components/pasta.js' type='text/javascript' defer></script>
-  <script src='components/sagerolls.js' type='text/javascript' defer></script>
-  <script src='components/greensalad.js' type='text/javascript' defer></script>
 
     <link rel="manifest" href="manifest.json">
   </head>
@@ -72,12 +67,12 @@ for being able to check the box -->
     <div id="controlButtonContainer">
       <button id="about" class="controlButton" aria-label="Link to license and the idea behind the cookbook">
         About
-      </button>
-      <!-- TODO Fix a aboutTrinForTrin.html -->
-      <a id="fallBackLink" href="aboutTrinForTrin.html"
-      aria-label="Link to license and the idea behind the cookbook">
+      </button> <!-- Turned off with CSS and turned on by JS. The next button is a fallback for people without JS -->
+
+      <a id="fallBackLink" href="aboutTrinForTrin.html" aria-label="Link to license and the idea behind the cookbook">
         About
-      </a>
+      </a> <!-- Turned off with JS. Only here as a service to people without JS -->
+
       <button class="controlButton" id="textSize"> <img id='textSizePNG' src="changeTextSize.png"
         aria-label="Change text size cyclically" alt="Change text size cyclically" height="16">
       </button>

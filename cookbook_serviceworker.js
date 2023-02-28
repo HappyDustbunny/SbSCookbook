@@ -1,14 +1,11 @@
 
 let VERSION = 1.002; // Change version number to facilitate updates
-let TFTK_CACHE = 'TFTK-cache';
-let CACHED_URLS = [
-  'components/rice.js', // Copy project path from EVERY entry to avoid mistakes
-  'components/sagerolls.js',
-  'components/greensalad.js',
+let SBSC_CACHE = 'SBSC-cache';
+let CACHED_URLS = [ // Copy project path from EVERY entry to avoid mistakes
   'favicons/favicon-192.png', // Check that ALL files have an extension
   'favicons/maskable_192.png',
   'favicons/favicon-512.png',
-  'aboutTrinForTrin.html',
+  'aboutStepByStep.html',
   'changeTextSize.png',
   'favicon.png',
   'favicon.ico',
@@ -24,7 +21,7 @@ let CACHED_URLS = [
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open(TFTK_CACHE).then(function(cache) {
+    caches.open(SBSC_CACHE).then(function(cache) {
       return cache.addAll(CACHED_URLS);
     })
   );

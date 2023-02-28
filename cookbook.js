@@ -10,7 +10,7 @@ $(function() {
     $('#fallBackLink').hide();
     $('#about').show();
     $('#about').on('click', function() {
-      window.location = 'aboutTrinForTrin.html'
+      window.location = 'aboutStepByStep.html'
     });
     $(window).scrollTop(0)
   }

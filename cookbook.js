@@ -80,6 +80,11 @@ $(function() {
     $('#foldOutFoldIn')[0].textContent = 'Fold everything';
   }
 
+  $('#disclaimer').on('click', function(event) {
+    event.preventDefault();
+    $('#disclaimerText').not('animated').show();
+  });
+
   // Fold everything
   $('.slut').on('click', function() {
     if ( $('.slut')[0].value != 'noSideDish') { // If a sidedish is open it needs to be closed before toggling everything shut
@@ -94,8 +99,6 @@ $(function() {
   $('.oversigt').on('click', '.kategori', function(event) {
     event.preventDefault();
     $(this).next('.opskrifter').not('animated').slideToggle();
-    // if ( $('.slut')[0].value == 'noSideDish') {
-    // }
   });
 
   $('.opskrifter').on('click', '.recipe', function(event) {
@@ -106,8 +109,6 @@ $(function() {
     $('.howto').hide(500);
     $(this).next('.ingredienser').not('animated').show();  // Open current recipe
     $(this).next('.ingredienser').next('.howto').not('animated').show();
-    // if ( $('.slut')[0].value == 'noSideDish') {
-    // }
   });
 
   $('.share').on('click', function(event) {

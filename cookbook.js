@@ -109,6 +109,7 @@ $(function() {
     $('.howto').hide(500);
     $(this).next('.ingredienser').not('animated').show();  // Open current recipe
     $(this).next('.ingredienser').next('.howto').not('animated').show();
+    $(this).next('div').children().not('animated').show();  // Open current recipe if used as side dish
   });
 
   $('.share').on('click', function(event) {

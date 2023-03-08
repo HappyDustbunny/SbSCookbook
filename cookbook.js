@@ -12,7 +12,7 @@ $(function() {
     $('#about').on('click', function() {
       window.location = 'aboutStepByStep.html'
     });
-    $(window).scrollTop(0)
+    $(window).scrollTop(0)  // Helps resetting page so the top becomes the top
   }
 
 
@@ -25,8 +25,8 @@ $(function() {
     else {
       hideAll();
     }
-
   });
+
 
   let direction = 1;
   let originalFontSize = parseInt($('body').css("font-size"));
@@ -43,13 +43,16 @@ $(function() {
     $('.controlButton').css("font-size", fontSize);
   })
 
+
   $('p').on('click', function() {
     if ($(this).children()[0]) {
       $(this).children()[0].checked = !$(this).children()[0].checked;
     }
   });
 
+
   $('.slut')[0].value = 'noSideDish'; // Initialise variable used for tracking if sidedishes are open
+
 
   function hideAll() {
     $('.opskrifter').hide(500);
@@ -60,7 +63,7 @@ $(function() {
 
     $('#foldOutFoldIn')[0].value = 'unfold';
     $('#foldOutFoldIn')[0].textContent = 'Unfold index';
-    $(window).scrollTop(0);
+    $(window).scrollTop(0);  // Helps resetting page so the top becomes the top
   }
 
 
@@ -96,10 +99,12 @@ $(function() {
     window.location.hash = '';  //Used for linking to reciepes
   });
 
+
   $('.oversigt').on('click', '.kategori', function(event) {
     event.preventDefault();
     $(this).next('.opskrifter').not('animated').slideToggle();
   });
+
 
   $('.opskrifter').on('click', '.recipe', function(event) {
     event.preventDefault();
@@ -112,11 +117,13 @@ $(function() {
     $(this).next('div').children().not('animated').show();  // Open current recipe if used as side dish
   });
 
+
   $('.share').on('click', function(event) {
     let subject = 'Link to recipe';
     let body = 'Try this recipe: ' + window.location.href + '#' + $(this).parent().parent().prev()[0].id;
     document.location = 'mailto:' + '?subject=' + subject + '&body=' + body;
   });
+
 
     let sideDishes = {
                       showBakedPotatoes: '#bakedPotatoes',
@@ -137,6 +144,7 @@ $(function() {
                       showTortilla: '#tortilla'
                     };
 
+
   for (let sDish in sideDishes) {  // Puts eventlisteners on all side dish buttons
     $('.' + sDish).on('click', function(event) {
       $('#sideDish').remove();
@@ -155,7 +163,4 @@ $(function() {
       }
     });
   };
-
-  // TODO: Baharat as inserted recipe?
-
 });

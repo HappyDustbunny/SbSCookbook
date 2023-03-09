@@ -46,11 +46,6 @@ input {
   margin-right: 1em;
 }
 
-iframe {
-  width="100%";
-  height="500px";
-}
-
 .alignleft { /*For Disclaimer section*/
   text-align: left;
 }

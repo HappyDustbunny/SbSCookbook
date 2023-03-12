@@ -118,14 +118,6 @@ $(function() {
   });
 
 
-  $('.share').on('click', function(event) {
-    let subject = 'Link to recipe';
-    let message = 'Try this recipe: ' + window.location.href + '#' + $(this).parent().parent().prev()[0].id;
-    let body = message.replace('##', '#');
-    document.location = 'mailto:' + '?subject=' + subject + '&body=' + body;
-  });
-
-
     let sideDishes = {
                       showBakedPotatoes: '#bakedPotatoes',
                       showBakedSesamePotatoes: '#bakedSesamePotatoes',
